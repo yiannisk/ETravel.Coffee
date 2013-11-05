@@ -51,7 +51,7 @@
 	
 	<script type="text/javascript" src="Scripts/app.js"></script>
 	<script type="text/javascript">
-		$(function() { coffee.app.settings.serviceLocator = '<%= Settings.ServiceLocator %>'; });
+		coffee.app.settings.serviceLocator = '<%= Settings.ServiceLocator %>';
 	</script>
 
 	<script type="text/javascript" src="Scripts/mustache.js"></script>
