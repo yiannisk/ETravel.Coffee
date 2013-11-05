@@ -68,6 +68,7 @@
     <Compile Include="Dtos\OrderItems.cs" />
     <Compile Include="Dtos\Orders.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\OrderItemsService.cs" />
     <Compile Include="Services\OrdersService.cs" />
   </ItemGroup>
   <ItemGroup>

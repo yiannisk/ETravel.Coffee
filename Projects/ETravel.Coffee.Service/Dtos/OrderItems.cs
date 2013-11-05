@@ -1,7 +1,9 @@
-﻿namespace ETravel.Coffee.Service.Dtos
+﻿using System;
+
+namespace ETravel.Coffee.Service.Dtos
 {
 	public class OrderItems
 	{
-		public virtual string OrderId { get; set; } 
+		public virtual Guid OrderId { get; set; } 
 	}
 }

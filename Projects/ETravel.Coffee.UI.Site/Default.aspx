@@ -4,8 +4,14 @@
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
-	<h2>Orders</h2>
-	<div class="orders-list"></div>
+	<div class="col-md-12">
+		<h2>Orders</h2>
+		<div class="orders-list">
+			<div class="loader">
+				<i class="fa fa-cog fa-spin large"></i> Loading...
+			</div>
+		</div>
+	</div>
 </asp:Content>
 
 <asp:Content runat="server" ContentPlaceHolderID="scripts">
