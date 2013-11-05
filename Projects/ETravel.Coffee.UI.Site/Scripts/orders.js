@@ -17,23 +17,43 @@ $(function () {
 				var $currentOrder = $('.orders-list .order:last');
 
 				$currentOrder.on('click', function () {
-					var selectedItemId = $('.orders-list .selected.order .id').val();
+					var selectedItemId = $('.orders-list .selected.order .order-id').val();
 
 					// Do nothing if the same item is clicked multiple times.
 					if (selectedItemId === orderData.Id) return;
 
 					$('.orders-list .order').removeClass('selected');
+					$('.orders-list .order').find('.order-items').hide();
+					$('.orders-list .order .actions').hide();
+
 					$(this).addClass('selected');
+					$(this).find('.order-items').show();
+
+					$('.orders-list .selected.order .actions').show();
+
+					$currentOrder
+						.find('.order-items')
+						.html('<div class="loader"><i class="fa fa-cog fa-spin large"></i> Loading...</div>');
 					
 					orderItemsFor(orderData.Id).get(function (data) {
-						renderOrderItems(data);
+						$currentOrder.find('.order-items').html('');
+						for(i = 0; i < data.length; i++) {					
+							renderOrderItems($currentOrder, data[i]);
+						}
 					});
 				});
 		    });
 	}
 
-	function renderOrderItems(orderItemData) {
+	function renderOrderItems($currentOrder, orderItemData) {
 		console.log(orderItemData);
+
+		$.Mustache.load('./Templates/OrderItem.htm')
+    		.done(function () {
+				$currentOrder
+					.find('.order-items')
+					.mustache('order_item', orderItemData, 'append');
+			});
 	}
 
 	function renderOrders() {

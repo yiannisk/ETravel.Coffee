@@ -1,12 +1,28 @@
 ﻿<script id="order" type="text/html">
 	<div class="order">
-		<div class="vendor">{{Vendor}}</div>
-		<div class="owner">{{Owner}}</div>
-		<div class="expires-at">{{ExpiresAt}}</div>
-		<div class="interval">{{Interval}}</div>
+		<div style="float: left">
+			<div class="vendor">{{Vendor}}</div>
+			<div class="owner">{{Owner}}</div>
+			<div class="expires-at">{{ExpiresAt}}</div>
+			<div class="interval">{{Interval}}</div>
+		</div>
+
+		<div style="float: right" class="actions">
+			<a href="#" class="btn btn-primary place-order">
+				<i class="fa fa-plus"></i>
+			</a>
+			<a href="#" class="btn btn-info print">
+				<i class="fa fa-print"></i>
+			</a>
+		</div>
+		
+		<div style="clear: both;"></div>
+
+		<div class="order-item-form"></div>
+		<div style="clear: both;"></div>
 
 		<div class="order-items"></div>
 
-		<input type="hidden" class="id" value="{{Id}}" />
+		<input type="hidden" class="order-id" value="{{Id}}" />
 	</div>
 </script>

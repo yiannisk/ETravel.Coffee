@@ -7,9 +7,7 @@
 	<div class="col-md-12">
 		<h2>Orders</h2>
 		<div class="orders-list">
-			<div class="loader">
-				<i class="fa fa-cog fa-spin large"></i> Loading...
-			</div>
+			<div class="loader"><i class="fa fa-cog fa-spin large"></i> Loading...</div>
 		</div>
 	</div>
 </asp:Content>
