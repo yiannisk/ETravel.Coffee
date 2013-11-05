@@ -4,6 +4,7 @@ using System.Web;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using NHibernate;
+using NHibernate.Cfg;
 using log4net;
 
 namespace ETravel.Coffee.DataAccess
@@ -85,13 +86,14 @@ namespace ETravel.Coffee.DataAccess
         {
             try
             {
-                return Fluently.Configure()
-                .Database(
-                    MsSqlConfiguration.MsSql2005.ConnectionString(Properties.Settings.Default.Database))
-                    .Cache(c => c.UseQueryCache().UseSecondLevelCache().ProviderClass<NHibernate.Caches.SysCache.SysCacheProvider>())
-                .Mappings(m => m.FluentMappings.AddFromAssemblyOf<SessionManager>())
-                .BuildSessionFactory();
+                var cfg = Fluently.Configure()
+					.Database(MsSqlConfiguration.MsSql2005.ConnectionString(Properties.Settings.Default.Database))
+					.Cache(c => c.UseQueryCache().UseSecondLevelCache().ProviderClass<NHibernate.Caches.SysCache.SysCacheProvider>())
+					.Mappings(m => m.FluentMappings.AddFromAssemblyOf<SessionManager>());
 
+            	cfg.ExposeConfiguration(x => x.SetProperty("DataBaseIntegration.KeywordsAutoImport", Hbm2DDLKeyWords.AutoQuote.ToString()));
+
+				return cfg.BuildSessionFactory();
             }
             catch (Exception e)
             {

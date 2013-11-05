@@ -5,8 +5,7 @@
 <head runat="server">
     <title></title>
     <link href="~/Styles/Site.css" rel="stylesheet" type="text/css" />
-    <asp:ContentPlaceHolder ID="HeadContent" runat="server">
-    </asp:ContentPlaceHolder>
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server"></asp:ContentPlaceHolder>
 </head>
 <body>
     <form runat="server">
@@ -47,5 +46,15 @@
         
     </div>
     </form>
+	
+	<script type="text/javascript" src="Scripts/jquery-2.0.3.min.js"></script>
+	
+	<script type="text/javascript" src="Scripts/app.js"></script>
+	<script type="text/javascript">
+		$(function() { coffee.app.settings.serviceLocator = '<%= Settings.ServiceLocator %>'; });
+	</script>
+
+	<script type="text/javascript" src="Scripts/mustache.js"></script>
+	<asp:ContentPlaceHolder ID="scripts" runat="server"></asp:ContentPlaceHolder>
 </body>
 </html>

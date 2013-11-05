@@ -1,4 +1,5 @@
-﻿using ETravel.Coffee.DataAccess.Interfaces;
+﻿using System.Linq;
+using ETravel.Coffee.DataAccess.Interfaces;
 using ETravel.Coffee.Service.Dtos;
 using ServiceStack.ServiceInterface;
 
@@ -10,7 +11,16 @@ namespace ETravel.Coffee.Service.Services
 
 		public override object OnGet(Orders request)
 		{
-			return OrdersRepository.All();
+			return OrdersRepository.All()
+				.Select(order => new Order
+				{
+					Id = order.Id,
+					ExpiresAt = order.ExpiresAt,
+					Interval = order.Interval,
+					Owner = order.Owner,
+					Vendor = order.Vendor
+				})
+				.ToList();
 		}
 	}
 }

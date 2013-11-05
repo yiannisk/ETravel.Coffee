@@ -63,6 +63,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CoffeeAppHost.cs" />
+    <Compile Include="Dtos\Order.cs" />
+    <Compile Include="Dtos\OrderItem.cs" />
     <Compile Include="Dtos\OrderItems.cs" />
     <Compile Include="Dtos\Orders.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

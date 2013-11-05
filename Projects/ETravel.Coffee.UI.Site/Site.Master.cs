@@ -1,14 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
+using ETravel.Coffee.UI.Site.Properties;
 
 namespace ETravel.Coffee.UI.Site
 {
-	public partial class SiteMaster : System.Web.UI.MasterPage
+	public partial class SiteMaster : MasterPage
 	{
+		protected internal Settings Settings { get; set; }
+
+		public SiteMaster()
+		{
+			Settings = Settings.Default;
+		}
+
 		protected void Page_Load(object sender, EventArgs e)
 		{
 

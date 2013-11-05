@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ETravel.Coffee.DataAccess.Entities
+namespace ETravel.Coffee.Service.Dtos
 {
 	public class Order
 	{

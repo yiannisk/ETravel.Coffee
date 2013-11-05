@@ -7,7 +7,7 @@ namespace ETravel.Coffee.DataAccess.Mappings
 	{
 		public OrderMap()
 		{
-			Table("Order");
+			Table("Orders");
 
 			Id(x => x.Id).GeneratedBy.Assigned();
 			

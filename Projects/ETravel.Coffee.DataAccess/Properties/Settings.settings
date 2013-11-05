@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="Database" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">server=ITDEVELOP05-PC\SQLEXPRESS; Integrated Security=true; Database=Coffee</Value>
+      <Value Profile="(Default)">server=KL1NT-PC\SQLEXPRESS; User Id=sa; Password=1234; Database=Coffee</Value>
     </Setting>
   </Settings>
 </SettingsFile>

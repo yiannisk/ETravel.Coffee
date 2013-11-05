@@ -8,12 +8,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ETravel.Coffee.DataAccess.Properties {
+namespace ETravel.Coffee.UI.Site.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "10.0.0.0")]
-    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+    public sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
         
@@ -25,10 +25,10 @@ namespace ETravel.Coffee.DataAccess.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("server=KL1NT-PC\\SQLEXPRESS; User Id=sa; Password=1234; Database=Coffee")]
-        public string Database {
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost/coffee")]
+        public string ServiceLocator {
             get {
-                return ((string)(this["Database"]));
+                return ((string)(this["ServiceLocator"]));
             }
         }
     }
