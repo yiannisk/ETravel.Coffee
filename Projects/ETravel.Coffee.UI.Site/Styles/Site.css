@@ -292,3 +292,40 @@ div.accountInfo
     text-align: right;
     padding-right: 10px;
 }
+
+/* Overrides */
+
+.orders-list {
+    padding-top: 20px;
+}
+
+.order {
+    padding: 10px;
+    border: 1px solid transparent;
+    background: #fff;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.order:hover {
+    background: #eee;
+    border: 1px solid #ddd;
+}
+
+.order.selected {
+    background: #d9ebf6;
+    border: 1px solid #33afce;
+}
+
+.order .vendor {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.order .expires-at {
+    display: none;
+}
+
+.order .interval {
+    display: none;
+}

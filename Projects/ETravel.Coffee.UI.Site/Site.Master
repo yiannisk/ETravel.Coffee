@@ -55,6 +55,7 @@
 	</script>
 
 	<script type="text/javascript" src="Scripts/mustache.js"></script>
+	<script type="text/javascript" src="Scripts/jquery.mustache.js"></script>
 	<asp:ContentPlaceHolder ID="scripts" runat="server"></asp:ContentPlaceHolder>
 </body>
 </html>
