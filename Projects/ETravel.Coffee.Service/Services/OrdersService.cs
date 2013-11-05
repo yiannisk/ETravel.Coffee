@@ -15,7 +15,7 @@ namespace ETravel.Coffee.Service.Services
 				.Select(order => new Order
 				{
 					Id = order.Id,
-					ExpiresAt = order.ExpiresAt,
+					ExpiresAt = order.ExpiresAt.HasValue ? string.Format("{0:yyyy-MM-dd HH:mm:ss}", order.ExpiresAt.Value) : string.Empty,
 					Interval = order.Interval,
 					Owner = order.Owner,
 					Vendor = order.Vendor

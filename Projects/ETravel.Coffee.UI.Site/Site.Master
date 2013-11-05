@@ -6,6 +6,8 @@
 		<title>Coffee</title>
 		<link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
 		<link href="~/Styles/font-awesome.min.css" rel="stylesheet" type="text/css" />
+		<link href="~/Styles/datepicker.css" rel="stylesheet" type="text/css" />
+		<link href="~/Styles/bootstrap-timepicker.css" rel="stylesheet" type="text/css" />
 		<link href="~/Styles/Site.css" rel="stylesheet" type="text/css" />
 
 		<asp:ContentPlaceHolder ID="HeadContent" runat="server"></asp:ContentPlaceHolder>
@@ -29,11 +31,25 @@
 						<li>
 							<form role="form" class="form">
 								<div class="form-group">
-									<label for="vendor">Vendor</label>
-									<input type="text" class="form-control" id="vendor" required="true" />
+									<label for="Vendor">Vendor</label>
+									<input type="text" class="form-control" id="Vendor" />
+
 									<label for="Owner">Owner</label>
-									<input type="text" class="form-control" id="owner" required="true" />
+									<input type="text" class="form-control" id="Owner" />
 								</div>
+
+								<div class="expiration-label">Expires at</div>
+								<div style="clear: both;"></div>
+
+								<div class="form-group" style="float: left">
+									<input type="text" class="form-control" id="ExpiresAtDate" />
+								</div>
+
+								<div class="form-group" style="float: right">
+									<input type="text" class="form-control" id="ExpiresAtTime" />
+								</div>
+								
+								<div style="clear: both;"></div>
 								
 								<div class="form-group" style="text-align: center">
 									<button type="submit" class="btn btn-primary">Create order</button>
@@ -50,6 +66,7 @@
 			<ul class="nav navbar-nav navbar-right">
 				<li>
 					<div class="login-display">
+						Login to go here
 					</div>
 				</li>
 			</ul>
@@ -61,6 +78,8 @@
 
 		<script type="text/javascript" src="Scripts/jquery-2.0.3.min.js"></script>
 		<script type="text/javascript" src="Scripts/bootstrap.min.js"></script>
+		<script type="text/javascript" src="Scripts/bootstrap-datepicker.js"></script>
+		<script type="text/javascript" src="Scripts/bootstrap-timepicker.js"></script>
 
 		<script type="text/javascript" src="Scripts/app.js"></script>
 		<script type="text/javascript" src="Scripts/resource.js"></script>

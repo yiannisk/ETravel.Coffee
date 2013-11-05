@@ -9,6 +9,21 @@ $(function () {
 	};
 
 	renderOrders();
+	$('.new-order-form #ExpiresAtDate').datepicker({
+		format: 'dd/mm/yyyy',
+		viewMode: 'days',
+		minViewMode: 'days'
+	}).on('changeDate', function (evt) {
+		$(this).datepicker('hide');
+	});
+
+
+	$('.new-order-form #ExpiresAtTime').timepicker({
+        minuteStep: 5,
+        showInputs: false,
+        disableFocus: true,
+        showMeridian: false
+    });
 
 	function renderOrder(orderData) {
 		$.Mustache.load('./Templates/Order.htm')

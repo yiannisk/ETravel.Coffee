@@ -111,10 +111,20 @@ body {
     padding: 10px 20px 10px 20px;
 }
 
-.new-order-form #vendor, .new-order-form #owner {
+.new-order-form #Vendor, .new-order-form #Owner {
     width: 250px;
+}
+
+.new-order-form #ExpiresAtDate, .new-order-form #ExpiresAtTime {
+    width: 120px;   
 }
 
 .new-order-form label {
     margin-top: 10px;
+}
+
+.new-order-form .expiration-label {
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 5px;
 }
