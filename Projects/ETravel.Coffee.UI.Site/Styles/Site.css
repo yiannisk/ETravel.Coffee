@@ -106,3 +106,15 @@ body {
 	background: url(../Images/coffee-back.png) no-repeat center center;
 	min-height: 600px;
 }
+
+.new-order-form {
+    padding: 10px 20px 10px 20px;
+}
+
+.new-order-form #vendor, .new-order-form #owner {
+    width: 250px;
+}
+
+.new-order-form label {
+    margin-top: 10px;
+}

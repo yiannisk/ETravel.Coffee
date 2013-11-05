@@ -21,11 +21,30 @@
 			</div>
 
 			<ul class="nav navbar-nav">
-			<% foreach(var link in Links) { %>
-				<li class="<%= Request.Url.AbsolutePath.Contains(link.Value) ? "active" : string.Empty %>">
-					<a href="<%= link.Value %>"><%= link.Key %></a>
+				<li class=""><a href="Default.aspx">Orders</a></li>
+				
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">New Order <b class="caret"></b></a>
+					<ul class="dropdown-menu new-order-form">
+						<li>
+							<form role="form" class="form">
+								<div class="form-group">
+									<label for="vendor">Vendor</label>
+									<input type="text" class="form-control" id="vendor" required="true" />
+									<label for="Owner">Owner</label>
+									<input type="text" class="form-control" id="owner" required="true" />
+								</div>
+								
+								<div class="form-group" style="text-align: center">
+									<button type="submit" class="btn btn-primary">Create order</button>
+								</div>
+							</form>
+						</li>
+					</ul>
 				</li>
-			<% } %>
+
+				<li class="divider"></li>
+				<li class=""><a href="About.aspx">About</a></li>
 			</ul>
 
 			<ul class="nav navbar-nav navbar-right">
