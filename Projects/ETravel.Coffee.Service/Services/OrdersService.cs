@@ -31,9 +31,10 @@ namespace ETravel.Coffee.Service.Services
 		{
 			DateTime parsed;
 
+			var orderId = Guid.NewGuid();
 			OrdersRepository.Save(new DataAccess.Entities.Order
 			{
-				Id = Guid.NewGuid(),
+				Id = orderId,
 				ExpiresAt = DateTime.TryParseExact(request.ExpiresAt, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.AssumeLocal, out parsed) 
 					? parsed 
 					: default(DateTime?),
@@ -42,7 +43,16 @@ namespace ETravel.Coffee.Service.Services
 				Owner = request.Owner
 			});
 
-			return new HttpResult { StatusCode = HttpStatusCode.Created };
+			var newOrder = OrdersRepository.GetById(orderId);
+			
+			return new Order
+			{
+				Id = newOrder.Id,
+				ExpiresAt = newOrder.ExpiresAt.HasValue ? string.Format("{0:yyyy-MM-dd HH:mm:ss}", newOrder.ExpiresAt) : null,
+				Owner = newOrder.Owner,
+				Vendor = newOrder.Vendor,
+				Interval = newOrder.Interval
+			};
 		}
 
 		public override object OnDelete(Orders request)
