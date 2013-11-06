@@ -102,6 +102,9 @@ $(function () {
 							.html('<i>Order closed - expired at: ' + $currentOrder.data('expiration') + '</i>');
 						
 						clearInterval($currentOrder.data('interval'));
+
+						// elapsed orders should not allow for adding items.
+						$currentOrder.find('.place-order').hide();
 					}
 				}));
 
