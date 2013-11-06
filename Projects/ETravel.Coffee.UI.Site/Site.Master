@@ -65,14 +65,6 @@
 				<li class="divider"></li>
 				<li class=""><a href="About.aspx">About</a></li>
 			</ul>
-
-			<ul class="nav navbar-nav navbar-right">
-				<li>
-					<div class="login-display">
-						Login to go here
-					</div>
-				</li>
-			</ul>
 		</nav>
 
 		<div class="container">
