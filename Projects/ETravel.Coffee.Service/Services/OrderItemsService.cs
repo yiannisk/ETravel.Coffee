@@ -14,7 +14,7 @@ namespace ETravel.Coffee.Service.Services
 			return OrderItemsRepository.ForOrderId(request.OrderId)
 				.Select(orderItem => new OrderItem
 				{
-					Id = orderItem.Id,
+					Id = orderItem.Id.GetValueOrDefault(),
 					Owner = orderItem.Owner,
 					Description = orderItem.Description,
 					OrderId = orderItem.OrderId,

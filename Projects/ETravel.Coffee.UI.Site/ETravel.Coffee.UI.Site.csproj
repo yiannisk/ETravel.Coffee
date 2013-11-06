@@ -62,8 +62,11 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Images\coffee-back.png" />
     <Content Include="Scripts\app.js" />
+    <Content Include="Scripts\bootstrap-datepicker.js" />
+    <Content Include="Scripts\bootstrap-timepicker.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\jqBootstrapValidation.js" />
     <Content Include="Scripts\jquery-2.0.3-vsdoc.js" />
     <Content Include="Scripts\jquery-2.0.3.js" />
     <Content Include="Scripts\jquery-2.0.3.min.js" />

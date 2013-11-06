@@ -1,20 +1,20 @@
 function Resource(name, url, actions, options) {
 	var i, 
 		actions = actions || ['get', 'post', 'put', 'delete'], 
-		options = options || { dataType: 'json' }
+		options = options || { dataType: 'json', contentType: 'application/json' },
 		self = this;
 
-	this.name = name;
-	this.url = url || coffee.app.settings.serviceLocator + '/' + name;
+	self.name = name;
+	self.url = url || coffee.app.settings.serviceLocator + '/' + name;
 	
-	for(i = 0, currentAction = actions[i]; i < actions.length; i ++) {
-		this[currentAction] = function (callback, methodOptions) {
-			var callback = callback, 
-				action = currentAction;
+	actions.map(function (action) {
+		var action = action;
 
-			$.ajax($.extend(options, methodOptions, {
+		self[action] = function (callback, methodOptions) {
+			var o = $.extend(options, methodOptions, {
 				url: self.url, 
-				type: action, 
+				type: action,
+
 				success: function (data) {
 					if (callback) callback(data);
 				}, 
@@ -22,7 +22,11 @@ function Resource(name, url, actions, options) {
 				error: function () {
 					if (callback) callback(null);
 				}
-			}));
+			});
+
+			$.ajax(o);
 		};
-	}
+	});
+
+	return self;
 }

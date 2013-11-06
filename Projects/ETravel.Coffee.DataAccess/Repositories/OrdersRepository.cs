@@ -12,9 +12,22 @@ namespace ETravel.Coffee.DataAccess.Repositories
 			return Session.CreateCriteria<Order>().List<Order>();
 		}
 
-		public virtual void SaveOrUpdate(Order order)
+		public virtual void Save(Order order)
 		{
-			Session.SaveOrUpdate(order);
+			Session.Save(order);
+			Session.Flush();
+		}
+
+		public virtual void Update(Order order)
+		{
+			Session.Update(order);
+			Session.Flush();
+		}
+
+		public virtual void Delete(Guid id)
+		{
+			Session.Delete(GetById(id));
+			Session.Flush();
 		}
 
 		public virtual Order GetById(Guid id)

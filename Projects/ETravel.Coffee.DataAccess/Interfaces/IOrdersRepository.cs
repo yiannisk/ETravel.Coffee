@@ -7,7 +7,9 @@ namespace ETravel.Coffee.DataAccess.Interfaces
 	public interface IOrdersRepository
 	{
 		IList<Order> All();
-		void SaveOrUpdate(Order order);
+		void Save(Order order);
+		void Update(Order order);
+		void Delete(Guid id);
 		Order GetById(Guid id);
 	}
 }

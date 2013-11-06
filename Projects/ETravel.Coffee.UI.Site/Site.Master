@@ -32,27 +32,28 @@
 							<form role="form" class="form">
 								<div class="form-group">
 									<label for="Vendor">Vendor</label>
-									<input type="text" class="form-control" id="Vendor" />
+									<input type="text" class="form-control" id="Vendor" required="required" data-validation-required-message="This field is required" />
 
 									<label for="Owner">Owner</label>
-									<input type="text" class="form-control" id="Owner" />
+									<input type="text" class="form-control" id="Owner" required="required" data-validation-required-message="This field is required" />
 								</div>
 
 								<div class="expiration-label">Expires at</div>
 								<div style="clear: both;"></div>
 
 								<div class="form-group" style="float: left">
-									<input type="text" class="form-control" id="ExpiresAtDate" />
+									<input type="text" class="form-control" id="ExpiresAtDate" value="<%= string.Format("{0:dd/MM/yyyy}", DateTime.Now) %>" 
+										required="required" data-validation-required-message="This field is required" />
 								</div>
 
 								<div class="form-group" style="float: right">
-									<input type="text" class="form-control" id="ExpiresAtTime" />
+									<input type="text" class="form-control" id="ExpiresAtTime" value="<%= string.Format("{0:HH:mm}", DateTime.Now.AddMinutes(20)) %>" required="required" data-validation-required-message="This field is required" />
 								</div>
 								
 								<div style="clear: both;"></div>
 								
 								<div class="form-group" style="text-align: center">
-									<button type="submit" class="btn btn-primary">Create order</button>
+									<button type="submit" class="btn btn-primary submit">Create order</button>
 								</div>
 							</form>
 						</li>
@@ -80,6 +81,7 @@
 		<script type="text/javascript" src="Scripts/bootstrap.min.js"></script>
 		<script type="text/javascript" src="Scripts/bootstrap-datepicker.js"></script>
 		<script type="text/javascript" src="Scripts/bootstrap-timepicker.js"></script>
+		<script type="text/javascript" src="Scripts/jqBootstrapValidation.js"></script>
 
 		<script type="text/javascript" src="Scripts/app.js"></script>
 		<script type="text/javascript" src="Scripts/resource.js"></script>
