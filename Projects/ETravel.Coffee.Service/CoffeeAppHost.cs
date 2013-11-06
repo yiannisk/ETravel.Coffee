@@ -44,11 +44,9 @@ namespace ETravel.Coffee.Service
 			Routes
 				.Add<Orders>("/orders", "GET")
 				.Add<Orders>("/orders", "POST")
-				.Add<Orders>("/orders", "PUT")
 				.Add<Orders>("/orders", "DELETE")
 				.Add<OrderItems>("/orders/{OrderId}/items", "GET")
 				.Add<OrderItems>("/orders/{OrderId}/items", "POST")
-				.Add<OrderItems>("/orders/{OrderId}/items", "PUT")
 				.Add<OrderItems>("/orders/{OrderId}/items", "DELETE")
 				;
 		}

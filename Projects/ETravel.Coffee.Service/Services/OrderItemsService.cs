@@ -50,5 +50,12 @@ namespace ETravel.Coffee.Service.Services
 				Id = newOrderItemId
 			};
 		}
+
+		public override object OnDelete(OrderItems request)
+		{
+			OrderItemsRepository.Delete(new Guid(request.Id));
+
+			return new HttpResult { StatusCode = HttpStatusCode.OK };
+		}
 	}
 }

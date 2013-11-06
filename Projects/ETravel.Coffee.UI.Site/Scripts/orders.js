@@ -98,6 +98,20 @@ $(function () {
     	$formContainer.hide();
     });
 
+    $(document).on('click', '.order .order-item .close', function (evt) {
+    	var $item = $(this).closest('.order-item'),
+    		$order = $item.closest('.order'),
+    		orderId = $order.find('.order-id').val();
+
+    	orderItemsFor(orderId).delete(function () {
+    		$item.remove();
+    	}, {
+    		data: JSON.stringify({
+    			Id: $item.find('.order-item-id').val()
+    		})
+    	})
+    });
+
 	/**************** Helpers ******************/
 
 	function getIsoDateFromGreekDate(greekDateString) {
@@ -132,7 +146,8 @@ $(function () {
 
 				$currentOrder.data('interval', countdown(expirationTime, function (timespan) {
 					if (timespan.value < 0) {
-						$currentOrder.find('.expires-at').html(timespan.toString());
+						$currentOrder.find('.expires-at').html('Expires at: ' + timespan.toString());
+						$currentOrder.find('.order-item .close').show();
 					} else {
 						$currentOrder.find('.expires-at')
 							.html('<i>Order closed - expired at: ' + $currentOrder.data('expiration') + '</i>');

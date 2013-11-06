@@ -97,6 +97,7 @@
     float: right;
     font-size: 1.4em;
     padding-left: 10px;
+    display: none;
 }
 
 .login-display {

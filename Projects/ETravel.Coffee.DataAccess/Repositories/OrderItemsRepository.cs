@@ -31,5 +31,11 @@ namespace ETravel.Coffee.DataAccess.Repositories
 			Session.Update(item);
 			Session.Flush();
 		}
+
+		public void Delete(Guid id)
+		{
+			Session.Delete(GetById(id));
+			Session.Flush();
+		}
 	}
 }

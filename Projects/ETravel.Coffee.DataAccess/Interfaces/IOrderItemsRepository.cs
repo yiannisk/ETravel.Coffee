@@ -10,5 +10,6 @@ namespace ETravel.Coffee.DataAccess.Interfaces
 		OrderItem GetById(Guid id);
 		void Save(OrderItem item);
 		void Update(OrderItem item);
+		void Delete(Guid id);
 	}
 }
