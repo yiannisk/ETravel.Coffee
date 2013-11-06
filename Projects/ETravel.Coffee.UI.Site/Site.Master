@@ -82,16 +82,15 @@
 		<script type="text/javascript" src="Scripts/bootstrap-datepicker.js"></script>
 		<script type="text/javascript" src="Scripts/bootstrap-timepicker.js"></script>
 		<script type="text/javascript" src="Scripts/jqBootstrapValidation.js"></script>
-
-		<script type="text/javascript" src="Scripts/app.js"></script>
-		<script type="text/javascript" src="Scripts/resource.js"></script>
+		<script type="text/javascript" src="Scripts/mustache.js"></script>
+		<script type="text/javascript" src="Scripts/jquery.mustache.js"></script>
+		<script type="text/javascript" src="Scripts/countdown.js"></script>
 		
+		<script type="text/javascript" src="Scripts/app.js"></script>
 		<script type="text/javascript">
 			coffee.app.settings.serviceLocator = '<%= Settings.ServiceLocator %>';
 		</script>
-		
-		<script type="text/javascript" src="Scripts/mustache.js"></script>
-		<script type="text/javascript" src="Scripts/jquery.mustache.js"></script>
+		<script type="text/javascript" src="Scripts/resource.js"></script>
 
 		<asp:ContentPlaceHolder ID="scripts" runat="server"></asp:ContentPlaceHolder>
 	</body>

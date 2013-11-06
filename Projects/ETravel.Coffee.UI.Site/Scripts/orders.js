@@ -1,6 +1,6 @@
 $(function () {
 	/**************** Initialization ******************/
-	var orders = new Resource('orders');
+	var orders = new Resource('orders'), currentCountdown;
 
 	console.log(orders);
 
@@ -40,7 +40,7 @@ $(function () {
     		data: JSON.stringify({
 	    		Vendor: $form.find('#Vendor').val(),
 	    		Owner: $form.find('#Owner').val(),
-	    		ExpiresAt: getDate($form.find('#ExpiresAtDate').val()) 
+	    		ExpiresAt: getIsoDateFromGreekDate($form.find('#ExpiresAtDate').val()) 
 	    			+ ' ' + $form.find('#ExpiresAtTime').val() + ':00'
 	    	})
     	};
@@ -64,9 +64,23 @@ $(function () {
 
 
 	/**************** Helpers ******************/
-	function getDate(greekDateString) {
+	function getIsoDateFromGreekDate(greekDateString) {
 		var parts = greekDateString.split('/');
 		return parts[2] + '-' + parts[1] + '-' + parts[0];
+	}
+
+	function getDateFromIsoDateString(isoDateString) {
+		var dateTimeParts = isoDateString.split(' '),
+			dateParts = dateTimeParts[0].split('-'),
+			timeParts = dateTimeParts[1].split(':'),
+			year = parseInt(dateParts[0]),
+			month = parseInt(dateParts[1]) - 1, // f..k this JS month shit
+			day = parseInt(dateParts[2]),
+			hour = parseInt(timeParts[0]),
+			minute = parseInt(timeParts[1]),
+			second = parseInt(timeParts[2]);
+
+		return new Date(year, month, day, hour, minute, second);
 	}
 
 	function renderOrder(orderData) {
@@ -74,6 +88,22 @@ $(function () {
 		    .done(function () {
 		        $('.orders-list').mustache('order', orderData, 'append');
 				var $currentOrder = $('.orders-list .order:last');
+
+				var expiresAtText = $currentOrder.find('.expires-at').text();
+				var expirationTime = getDateFromIsoDateString(expiresAtText);
+				
+				$currentOrder.data('expiration', expiresAtText);
+
+				$currentOrder.data('interval', countdown(expirationTime, function (timespan) {
+					if (timespan.value < 0) {
+						$currentOrder.find('.expires-at').html(timespan.toString());
+					} else {
+						$currentOrder.find('.expires-at')
+							.html('<i>Order closed - expired at: ' + $currentOrder.data('expiration') + '</i>');
+						
+						clearInterval($currentOrder.data('interval'));
+					}
+				}));
 
 				$currentOrder.on('click', function () {
 					var selectedItemId = $('.orders-list .selected.order .order-id').val();
