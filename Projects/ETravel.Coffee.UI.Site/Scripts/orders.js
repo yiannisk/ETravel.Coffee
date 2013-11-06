@@ -71,7 +71,6 @@ $(function () {
     	
     	var request = {
     		data: JSON.stringify({
-    			OrderId: $order.find('.order-id').val(),
     			Quantity: $form.find('#quantity').val(),
     			Description: $form.find('#description').val(),
     			Owner: $form.find('#owner').val()
