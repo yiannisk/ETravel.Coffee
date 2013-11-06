@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using ETravel.Coffee.DataAccess.Interfaces;
 using Order = ETravel.Coffee.DataAccess.Entities.Order;
 
@@ -9,7 +10,12 @@ namespace ETravel.Coffee.DataAccess.Repositories
 	{
 		public virtual IList<Order> All()
 		{
-			return Session.CreateCriteria<Order>().List<Order>();
+			return Session
+				.CreateCriteria<Order>()
+				.List<Order>()
+				.OrderBy(x => x.ExpiresAt)
+				.Reverse()
+				.ToList();
 		}
 
 		public virtual void Save(Order order)
