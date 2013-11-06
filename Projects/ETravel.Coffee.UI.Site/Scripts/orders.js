@@ -57,7 +57,7 @@ $(function () {
 
     	var request = { data: JSON.stringify({ Id: orderId }) };
     	orders.delete(function () {
-    		// TODO: Delete the order from the layout.
+    		$order.remove();
     	}, request);
     });
 
