@@ -8,6 +8,7 @@ namespace ETravel.Coffee.DataAccess.Interfaces
 	{
 		IList<OrderItem> ForOrderId(Guid orderId);
 		OrderItem GetById(Guid id);
-		void SaveOrUpdate(OrderItem item);
+		void Save(OrderItem item);
+		void Update(OrderItem item);
 	}
 }

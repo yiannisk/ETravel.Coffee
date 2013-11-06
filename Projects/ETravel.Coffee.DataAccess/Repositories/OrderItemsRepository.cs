@@ -20,9 +20,16 @@ namespace ETravel.Coffee.DataAccess.Repositories
 			return Session.Get<OrderItem>(id);
 		}
 
-		public void SaveOrUpdate(OrderItem item)
+		public void Save(OrderItem item)
 		{
-			Session.SaveOrUpdate(item);
+			Session.Save(item);
+			Session.Flush();
+		}
+
+		public void Update(OrderItem item)
+		{
+			Session.Update(item);
+			Session.Flush();
 		}
 	}
 }

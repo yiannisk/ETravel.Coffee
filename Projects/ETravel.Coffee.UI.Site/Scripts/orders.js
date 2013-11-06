@@ -62,7 +62,8 @@ $(function () {
 
     $(document).on('submit', '.order .order-item-form form', function (evt) {
     	var $form = $(this),
-    		$order = $form.closest('.order-item-form');
+    		$order = $form.closest('.order'), 
+    		orderId = $order.find('.order-id').val();
 
     	evt.preventDefault();
     	evt.stopPropagation();
@@ -77,6 +78,8 @@ $(function () {
     		})
     	};
 
+    	orderItemsFor(orderId).post(nop, request);
+
     	return false;
     });
 
@@ -89,6 +92,8 @@ $(function () {
     });
 
 	/**************** Helpers ******************/
+	function nop() {}
+
 	function getIsoDateFromGreekDate(greekDateString) {
 		var parts = greekDateString.split('/');
 		return parts[2] + '-' + parts[1] + '-' + parts[0];

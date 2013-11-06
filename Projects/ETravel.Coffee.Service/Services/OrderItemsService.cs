@@ -1,6 +1,9 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using System.Net;
 using ETravel.Coffee.DataAccess.Interfaces;
 using ETravel.Coffee.Service.Dtos;
+using ServiceStack.Common.Web;
 using ServiceStack.ServiceInterface;
 
 namespace ETravel.Coffee.Service.Services
@@ -21,6 +24,20 @@ namespace ETravel.Coffee.Service.Services
 					Quantity = orderItem.Quantity
 				})
 				.ToList();
+		}
+
+		public override object OnPost(OrderItems request)
+		{
+			OrderItemsRepository.Save(new DataAccess.Entities.OrderItem
+			{
+				Description = request.Description,
+				OrderId = request.OrderId,
+				Id = Guid.NewGuid(),
+				Owner = request.Owner,
+				Quantity = request.Quantity
+			});
+
+			return new HttpResult { StatusCode = HttpStatusCode.Created };
 		}
 	}
 }
