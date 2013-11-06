@@ -60,7 +60,7 @@ $(function () {
     	$order.find('.order-item-form').show();
     });
 
-    $(document).on('submit', '.order .order-item-form form', function () {
+    $(document).on('submit', '.order .order-item-form form', function (evt) {
     	evt.preventDefault();
     	evt.stopPropagation();
 
@@ -69,6 +69,13 @@ $(function () {
     	return false;
     });
 
+    $(document).on('click', '.order .order-item-form .cancel', function (evt) {
+    	var $formContainer = $(this).closest('.order-item-form'),
+    		form = $(this).closest('form')[0];
+
+    	form.reset();
+    	$formContainer.hide();
+    });
 
 	/**************** Helpers ******************/
 	function getIsoDateFromGreekDate(greekDateString) {
