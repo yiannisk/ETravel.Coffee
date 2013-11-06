@@ -26,7 +26,7 @@ $(function () {
         showMeridian: false
     });
 
-    $('.new-order-form input').jqBootstrapValidation();
+    $('.new-order-form input, .order-item-form input').jqBootstrapValidation();
 
     $('.new-order-form').on('submit', function (evt) {
     	var $form = $(this);
@@ -61,10 +61,22 @@ $(function () {
     });
 
     $(document).on('submit', '.order .order-item-form form', function (evt) {
+    	var $form = $(this),
+    		$order = $form.closest('.order-item-form');
+
     	evt.preventDefault();
     	evt.stopPropagation();
 
     	console.log('Submitting order item form...');
+    	
+    	var request = {
+    		data: JSON.stringify({
+    			OrderId: $order.find('.order-id').val(),
+    			Quantity: $form.find('#quantity').val(),
+    			Description: $form.find('#description').val(),
+    			Owner: $form.find('#owner').val()
+    		})
+    	};
 
     	return false;
     });
