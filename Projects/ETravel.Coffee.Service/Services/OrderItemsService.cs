@@ -28,16 +28,27 @@ namespace ETravel.Coffee.Service.Services
 
 		public override object OnPost(OrderItems request)
 		{
+			var newOrderItemId = Guid.NewGuid();
+
 			OrderItemsRepository.Save(new DataAccess.Entities.OrderItem
 			{
 				Description = request.Description,
 				OrderId = request.OrderId,
-				Id = Guid.NewGuid(),
+				Id = newOrderItemId,
 				Owner = request.Owner,
 				Quantity = request.Quantity
 			});
 
-			return new HttpResult { StatusCode = HttpStatusCode.Created };
+			var newOrderItem = OrderItemsRepository.GetById(newOrderItemId);
+
+			return new OrderItem
+			{
+				Description = newOrderItem.Description,
+				OrderId = newOrderItem.OrderId,
+				Owner = newOrderItem.Owner,
+				Quantity = newOrderItem.Quantity,
+				Id = newOrderItemId
+			};
 		}
 	}
 }
