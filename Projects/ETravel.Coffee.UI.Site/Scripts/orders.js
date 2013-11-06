@@ -2,8 +2,6 @@ $(function () {
 	/**************** Initialization ******************/
 	var orders = new Resource('orders'), currentCountdown;
 
-	console.log(orders);
-
 	var orderItemsFor = function (orderId) {
 		return new Resource(
 			'order_items', 
@@ -50,16 +48,25 @@ $(function () {
     });
 
     $(document).on('click', '.order .remove', function () {
-    	console.log('remove clicked');
-
     	var $order = $(this).closest('.order'),
     		orderId = $order.find('.order-id').val();
 
     	var request = { data: JSON.stringify({ Id: orderId }) };
-
-    	console.log(orderId, request);
-
     	orders.delete(function () {}, request);
+    });
+
+    $(document).on('click', '.order .place-order', function () {
+    	var $order = $(this).closest('.order');
+    	$order.find('.order-item-form').show();
+    });
+
+    $(document).on('submit', '.order .order-item-form form', function () {
+    	evt.preventDefault();
+    	evt.stopPropagation();
+
+    	console.log('Submitting order item form...');
+
+    	return false;
     });
 
 
@@ -115,7 +122,8 @@ $(function () {
 					if (selectedItemId === orderData.Id) return;
 
 					$('.orders-list .order').removeClass('selected');
-					$('.orders-list .order').find('.order-items').hide();
+					$('.orders-list .order .order-items').hide();
+					$('.orders-list .order .order-item-form').hide();
 					$('.orders-list .order .actions').hide();
 
 					$(this).addClass('selected');

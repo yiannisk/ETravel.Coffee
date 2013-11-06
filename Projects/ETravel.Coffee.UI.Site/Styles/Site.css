@@ -45,6 +45,18 @@
     display: none;
 }
 
+.order .order-item-form #quantity {
+    width: 65px;
+}
+
+.order .order-item-form #description {
+    width: 300px;
+}
+
+.order .order-item-form #owner {
+    width: 150px;
+}
+
 .order .order-items .order-item:first-child {
     margin-top: 15px;
 }
