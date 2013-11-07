@@ -59,6 +59,13 @@ namespace ETravel.Coffee.Service.Services
 		public override object OnDelete(Orders request)
 		{
 			var orderItems = OrderItemsRepository.ForOrderId(new Guid(request.Id)).ToList();
+
+			if (orderItems.Count == 0)
+				return new HttpResult
+				{
+					StatusCode = (HttpStatusCode) 422,
+					StatusDescription = "No order found for the given identifier."
+				};
 			
 			// BUG: If more than one order items are contained in the order, it can 't be deleted.
 			if (orderItems.Count > 1) return new HttpResult { StatusCode = HttpStatusCode.OK };

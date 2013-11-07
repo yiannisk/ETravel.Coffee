@@ -10,11 +10,12 @@ namespace ETravel.Coffee.Service.Services
 {
 	public class OrderItemsService : RestServiceBase<OrderItems>
 	{
+		public IOrdersRepository OrdersRepository { get; set; }
 		public IOrderItemsRepository OrderItemsRepository { get; set; }
 
 		public override object OnGet(OrderItems request)
 		{
-			return OrderItemsRepository.ForOrderId(request.OrderId)
+			var orderItems = OrderItemsRepository.ForOrderId(request.OrderId)
 				.Select(orderItem => new OrderItem
 				{
 					Id = orderItem.Id.GetValueOrDefault(),
@@ -24,10 +25,21 @@ namespace ETravel.Coffee.Service.Services
 					Quantity = orderItem.Quantity
 				})
 				.ToList();
+
+			return orderItems.Count == 0 ? null : orderItems;
 		}
 
 		public override object OnPost(OrderItems request)
 		{
+			var order = OrdersRepository.GetById(request.OrderId);
+
+			if (order == null)
+				return new HttpResult
+				{
+					StatusCode = (HttpStatusCode) 422, 
+					StatusDescription = "No order was found for the given OrderId."
+				};
+
 			var newOrderItemId = Guid.NewGuid();
 
 			OrderItemsRepository.Save(new DataAccess.Entities.OrderItem
@@ -53,7 +65,25 @@ namespace ETravel.Coffee.Service.Services
 
 		public override object OnDelete(OrderItems request)
 		{
-			OrderItemsRepository.Delete(new Guid(request.Id));
+			var order = OrdersRepository.GetById(request.OrderId);
+
+			if (order == null)
+				return new HttpResult
+				{
+					StatusCode = (HttpStatusCode)422,
+					StatusDescription = "No order was found for the given OrderId."
+				};
+
+			var orderItem = OrderItemsRepository.GetById(new Guid(request.Id));
+
+			if (orderItem == null)
+				return new HttpResult
+				{
+					StatusCode = (HttpStatusCode) 422, 
+					StatusDescription = "No order item was found for the given identifier."
+				};
+
+			OrderItemsRepository.Delete(orderItem.Id.GetValueOrDefault());
 
 			return new HttpResult { StatusCode = HttpStatusCode.OK };
 		}
