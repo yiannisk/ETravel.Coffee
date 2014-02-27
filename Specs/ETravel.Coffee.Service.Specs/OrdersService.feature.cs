@@ -90,7 +90,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 10
  testRunner.When("I place a POST request to the orders service for a new order", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 11
- testRunner.Then("The orders service should respond with status created", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("The orders service should respond with the created order", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 12
  testRunner.When("I place a GET request to the orders service", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 13
@@ -102,14 +102,15 @@ this.ScenarioSetup(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Delete an order")]
-        public virtual void DeleteAnOrder()
+        [NUnit.Framework.DescriptionAttribute("Delete an order with one order item")]
+        public virtual void DeleteAnOrderWithOneOrderItem()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Delete an order", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Delete an order with one order item", ((string[])(null)));
 #line 16
 this.ScenarioSetup(scenarioInfo);
 #line 17
- testRunner.When("I place a DELETE request to the orders service for an existing order", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I place a DELETE request to the orders service for an existing order with one ord" +
+                    "er item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 18
  testRunner.Then("The orders service should respond with status Ok", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 19
@@ -117,6 +118,28 @@ this.ScenarioSetup(scenarioInfo);
 #line 20
  testRunner.Then("I should get back all the orders currently in the database", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 21
+ testRunner.And("The deleted order should not be among them", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Delete an order with nore than one order items")]
+        public virtual void DeleteAnOrderWithNoreThanOneOrderItems()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Delete an order with nore than one order items", ((string[])(null)));
+#line 23
+this.ScenarioSetup(scenarioInfo);
+#line 24
+ testRunner.When("I place a DELETE request to the orders service for an existing order with multipl" +
+                    "e order items", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 25
+ testRunner.Then("The orders service should respond with status Ok", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 26
+ testRunner.When("I place a GET request to the orders service", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 27
+ testRunner.Then("I should get back all the orders currently in the database", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 28
  testRunner.And("The deleted order should not be among them", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();

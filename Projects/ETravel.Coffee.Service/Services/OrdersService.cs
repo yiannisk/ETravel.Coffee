@@ -35,7 +35,7 @@ namespace ETravel.Coffee.Service.Services
 			var orderId = Guid.NewGuid();
 			OrdersRepository.Save(new DataAccess.Entities.Order
 			{
-				Id = Guid.NewGuid(),
+				Id = orderId,
 				ExpiresAt = DateTime.TryParseExact(request.ExpiresAt, "yyyy-MM-dd HH:mm:ss", 
 					CultureInfo.InvariantCulture, DateTimeStyles.AssumeLocal, out parsed) 
 						? parsed 

@@ -17,10 +17,11 @@ namespace ETravel.Coffee.Service.Specs
     public class OrdersServiceSteps
     {
 		private List<DataAccess.Entities.Order> GetOrdersFixture { get; set; }
+		private List<DataAccess.Entities.OrderItem> GetOrderItemsFixture { get; set; }
 		private List<Order> GetOrdersResponse { get; set; }
 		private OrdersService Service { get; set; }
 		private static Fixture Fixture { get { return new Fixture();  } }
-		private HttpResult PostNewOrderResponse { get; set; }
+		private Order PostNewOrderResponse { get; set; }
 		private HttpResult DeleteOrderResponse { get; set; }
 		private Orders PostNewOrder { get; set; }
 		private Orders DeletedOrder { get; set; }
@@ -28,6 +29,7 @@ namespace ETravel.Coffee.Service.Specs
     	public OrdersServiceSteps()
     	{
     		GetOrdersFixture = Fixture.CreateMany<DataAccess.Entities.Order>().ToList();
+    		GetOrderItemsFixture = Fixture.CreateMany<DataAccess.Entities.OrderItem>().ToList();
 
 			var ordersRepoMock = new Mock<IOrdersRepository>();
 			
@@ -38,12 +40,25 @@ namespace ETravel.Coffee.Service.Specs
 			ordersRepoMock
 				.Setup(x => x.Save(It.IsAny<DataAccess.Entities.Order>()))
 				.Callback<DataAccess.Entities.Order>(order => GetOrdersFixture.Add(order));
-			
+
+    		ordersRepoMock
+    			.Setup(x => x.GetById(It.IsAny<Guid>()))
+    			.Returns<Guid>(id => GetOrdersFixture.Single(x => x.Id == id));
+		
 			ordersRepoMock
 				.Setup(x => x.Delete(It.IsAny<Guid>()))
 				.Callback<Guid>(id => GetOrdersFixture.Remove(GetOrdersFixture.Single(x => x.Id.HasValue && x.Id.Value == id)));
-    
-			Service = new OrdersService { OrdersRepository = ordersRepoMock.Object };
+
+
+    		var orderItemsRepoMock = new Mock<IOrderItemsRepository>();
+
+    		orderItemsRepoMock.Setup(x => x.ForOrderId(It.IsAny<Guid>())).Returns(GetOrderItemsFixture);
+
+			Service = new OrdersService
+			{
+				OrdersRepository = ordersRepoMock.Object, 
+				OrderItemsRepository = orderItemsRepoMock.Object
+			};
     	}
 
         [When(@"I place a GET request to the orders service")]
@@ -76,13 +91,15 @@ namespace ETravel.Coffee.Service.Specs
 				Vendor = "Vendor"
 			};
 
-			PostNewOrderResponse = Service.Post(PostNewOrder) as HttpResult;
+			PostNewOrderResponse = Service.Post(PostNewOrder) as Order;
 		}
-		
-		[Then(@"The orders service should respond with status created")]
+
+		[Then(@"The orders service should respond with the created order")]
 		public void ThenTheOrdersServiceShouldRespondWithStatusCreated()
 		{
-			Assert.AreEqual(HttpStatusCode.Created, PostNewOrderResponse.StatusCode);
+			Assert.AreEqual(PostNewOrder.Owner, PostNewOrderResponse.Owner);
+			Assert.AreEqual(PostNewOrder.Vendor, PostNewOrderResponse.Vendor);
+			Assert.AreEqual(PostNewOrder.ExpiresAt, PostNewOrderResponse.ExpiresAt);
 		}
 
 		[Then(@"The new order should be among them")]
@@ -94,12 +111,26 @@ namespace ETravel.Coffee.Service.Specs
 								   && x.Vendor == PostNewOrder.Vendor));
 		}
 
-		[When(@"I place a DELETE request to the orders service for an existing order")]
-		public void WhenIPlaceADELETERequestToTheOrdersServiceForAnExistingOrder()
+		[When(@"I place a DELETE request to the orders service for an existing order with one order item")]
+		public void WhenIPlaceADELETERequestToTheOrdersServiceForAnExistingOrderWithOneOrderItem()
 		{
 			var fixture = GetOrdersFixture.First();
-			DeletedOrder = new Orders { Id = fixture.Id.GetValueOrDefault().ToString() };
 
+			var orderItemsFixtures = GetOrderItemsFixture.Skip(1).ToList();
+			GetOrderItemsFixture.RemoveRange(1, GetOrderItemsFixture.Count - 1);
+
+			DeletedOrder = new Orders { Id = fixture.Id.GetValueOrDefault().ToString() };
+			DeleteOrderResponse = Service.Delete(DeletedOrder) as HttpResult;
+
+			GetOrderItemsFixture.AddRange(orderItemsFixtures);
+		}
+
+		[When(@"I place a DELETE request to the orders service for an existing order with multiple order items")]
+		public void WhenIPlaceADELETERequestToTheOrdersServiceForAnExistingOrderWithMultipleOrderItems()
+		{
+			var fixture = GetOrdersFixture.First();
+
+			DeletedOrder = new Orders { Id = fixture.Id.GetValueOrDefault().ToString() };
 			DeleteOrderResponse = Service.Delete(DeletedOrder) as HttpResult;
 		}
 
